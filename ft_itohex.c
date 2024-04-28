@@ -27,20 +27,21 @@ int	len_hex(unsigned long long nb)
 
 int	ft_itohex(unsigned long long nbr, const char c)
 {
-	int	i;
+	static int	i;
 
 	i = 0;
 	if (nbr >= 16)
 	{
 		i += ft_itohex(nbr / 16, c);
 		i += ft_itohex(nbr % 16, c);
+		return (i);
 	}
 	else
 	{
 		i++;
 		if (nbr <= 9)
 			ft_putchar(nbr + '0');
-		if (nbr >= 10 && nbr <= 15)
+		if (nbr >= 10)
 		{
 			if (c == 'x')
 				ft_putchar(nbr - 10 + 'a');

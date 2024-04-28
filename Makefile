@@ -12,30 +12,32 @@
 
 NAME = libftprintf.a 
 CC = gcc
-OBJDIR = obj
 FLAGS = -Wall -Wextra -Werror
-SRC =	ft_fctbase.c\
-		ft_itohex.c\
-		ft_mitoa.c\
-		ft_printf.c\
-		ft_uitoa
+
+SRC = $(wildcard *.c)
 
 OBJ = $(SRC:.c=.o)
 
-all: $(NAME)
+OBJDIR = obj
+
+all: $(OBJDIR) $(NAME)
 
 $(OBJDIR)/%.o: %.c
-	$(CC) $(CFLAG) -c $< -o $@
+	$(CC) $(FLAGS) -c $< -o $@
 
-$(NAME):	$(OBJ)
-	ar rc $(NAME) $(OBJ)
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
+
+$(NAME): $(addprefix $(OBJDIR)/, $(OBJ))
+	ar rc $(NAME) $(addprefix $(OBJDIR)/, $(OBJ))
 
 clean:
-	/bin/rm -f $(OBJ)
+	/bin/rm -f $(addprefix $(OBJDIR)/, $(OBJ))
+	/bin/rm -r $(OBJDIR)
 fclean: clean
 	/bin/rm -f $(NAME)
-	
 
 re: fclean all
 
 .PHONY: clean fclean re all
+
