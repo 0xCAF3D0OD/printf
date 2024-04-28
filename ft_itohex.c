@@ -27,7 +27,7 @@ int	len_hex(unsigned long long nb)
 
 int	ft_itohex(unsigned long long nbr, const char c)
 {
-	static int	i;
+	int	i;
 
 	i = 0;
 	if (nbr >= 16)
@@ -38,7 +38,6 @@ int	ft_itohex(unsigned long long nbr, const char c)
 	}
 	else
 	{
-		i++;
 		if (nbr <= 9)
 			ft_putchar(nbr + '0');
 		if (nbr >= 10)
