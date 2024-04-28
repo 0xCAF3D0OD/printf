@@ -12,14 +12,20 @@
 
 NAME = libftprintf.a 
 CC = gcc
+OBJDIR = obj
 FLAGS = -Wall -Wextra -Werror
-OPTION = -c
-SRC = $(wildcard *.c)
+SRC =	ft_fctbase.c\
+		ft_itohex.c\
+		ft_mitoa.c\
+		ft_printf.c\
+		ft_uitoa
+
 OBJ = $(SRC:.c=.o)
 
-.c.o : ${CC} ${FLAGS} -c $< -o ${<:.c=.0}
-
 all: $(NAME)
+
+$(OBJDIR)/%.o: %.c
+	$(CC) $(CFLAG) -c $< -o $@
 
 $(NAME):	$(OBJ)
 	ar rc $(NAME) $(OBJ)
